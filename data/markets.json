@@ -1,0 +1,16 @@
+[
+  {
+    "id": "atlanta-ga",
+    "name": "Atlanta, GA",
+    "marketPriceMultiplier": 1.23,
+    "permitWeeks": 5,
+    "logisticsUSD": 12000
+  },
+  {
+    "id": "tampa-fl",
+    "name": "Tampa, FL",
+    "marketPriceMultiplier": 1.27,
+    "permitWeeks": 6,
+    "logisticsUSD": 15000
+  }
+]

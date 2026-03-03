@@ -1,0 +1,39 @@
+{
+  "interior": {
+    "flooringTier": {
+      "basic": { "label": "Basic", "priceDeltaUSD": 0, "timeDeltaWeeks": 0, "energySavingsPctDelta": 0, "notes": "Durable engineered flooring" },
+      "standard": { "label": "Standard", "priceDeltaUSD": 8500, "timeDeltaWeeks": 1, "energySavingsPctDelta": 1, "notes": "LVP and upgraded transitions" },
+      "premium": { "label": "Premium", "priceDeltaUSD": 19000, "timeDeltaWeeks": 2, "energySavingsPctDelta": 2, "notes": "Wide plank hardwood package" }
+    },
+    "kitchenTier": {
+      "basic": { "label": "Basic", "priceDeltaUSD": 0, "timeDeltaWeeks": 0, "energySavingsPctDelta": 0, "notes": "Builder appliance set" },
+      "standard": { "label": "Standard", "priceDeltaUSD": 16000, "timeDeltaWeeks": 1, "energySavingsPctDelta": 2, "notes": "Energy-rated appliance package" },
+      "premium": { "label": "Premium", "priceDeltaUSD": 32000, "timeDeltaWeeks": 2, "energySavingsPctDelta": 4, "notes": "Chef-grade + induction setup" }
+    },
+    "bathTier": {
+      "basic": { "label": "Basic", "priceDeltaUSD": 0, "timeDeltaWeeks": 0, "energySavingsPctDelta": 0, "notes": "Standard fixtures" },
+      "standard": { "label": "Standard", "priceDeltaUSD": 9200, "timeDeltaWeeks": 1, "energySavingsPctDelta": 1, "notes": "Low-flow premium fixtures" },
+      "premium": { "label": "Premium", "priceDeltaUSD": 18500, "timeDeltaWeeks": 2, "energySavingsPctDelta": 2, "notes": "Spa package + water recirculation" }
+    }
+  },
+  "exterior": {
+    "facade": {
+      "modern": { "label": "Modern", "priceDeltaUSD": 12000, "timeDeltaWeeks": 1, "energySavingsPctDelta": 1, "notes": "Contemporary elevations" },
+      "transitional": { "label": "Transitional", "priceDeltaUSD": 9000, "timeDeltaWeeks": 1, "energySavingsPctDelta": 1, "notes": "Balanced curb profile" },
+      "classic": { "label": "Classic", "priceDeltaUSD": 7000, "timeDeltaWeeks": 0, "energySavingsPctDelta": 0, "notes": "Traditional façade treatment" }
+    },
+    "roof": {
+      "architectural-shingle": { "label": "Architectural Shingle", "priceDeltaUSD": 0, "timeDeltaWeeks": 0, "energySavingsPctDelta": 0, "notes": "Baseline roof assembly" },
+      "standing-seam-metal": { "label": "Standing Seam Metal", "priceDeltaUSD": 21000, "timeDeltaWeeks": 1, "energySavingsPctDelta": 3, "notes": "Long-life reflective roof" }
+    },
+    "solarReady": {
+      "false": { "label": "No", "priceDeltaUSD": 0, "timeDeltaWeeks": 0, "energySavingsPctDelta": 0, "notes": "No prewiring" },
+      "true": { "label": "Yes", "priceDeltaUSD": 6500, "timeDeltaWeeks": 1, "energySavingsPctDelta": 6, "notes": "Conduit, panel and structural prep" }
+    }
+  },
+  "smartPackages": {
+    "BASIC": { "label": "Smart-Ready", "priceDeltaUSD": 7000, "timeDeltaWeeks": 0, "energySavingsPctDelta": 2, "notes": "Connected thermostat and basic sensors" },
+    "PLUS": { "label": "Smart+Energy", "priceDeltaUSD": 15500, "timeDeltaWeeks": 1, "energySavingsPctDelta": 6, "notes": "Load management + occupancy optimization" },
+    "PRO": { "label": "Energy Asset Mode", "priceDeltaUSD": 29000, "timeDeltaWeeks": 2, "energySavingsPctDelta": 11, "notes": "Battery-ready controls and predictive optimization" }
+  }
+}
