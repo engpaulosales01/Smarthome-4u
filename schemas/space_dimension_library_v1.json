@@ -1,0 +1,211 @@
+{
+  "entry": {
+    "min_area_m2": 4.0,
+    "preferred_area_m2": [
+      5.0,
+      8.0
+    ],
+    "min_clear_width_m": 1.6
+  },
+  "foyer": {
+    "min_area_m2": 5.0,
+    "preferred_area_m2": [
+      6.0,
+      10.0
+    ],
+    "min_clear_width_m": 1.8
+  },
+  "living_main": {
+    "min_area_m2": 24.0,
+    "preferred_area_m2": [
+      30.0,
+      45.0
+    ],
+    "min_clear_width_m": 4.5
+  },
+  "living_secondary": {
+    "min_area_m2": 12.0,
+    "preferred_area_m2": [
+      15.0,
+      24.0
+    ],
+    "min_clear_width_m": 3.2
+  },
+  "dining": {
+    "min_area_m2": 10.0,
+    "preferred_area_m2": [
+      12.0,
+      20.0
+    ],
+    "min_clear_width_m": 3.0
+  },
+  "kitchen": {
+    "min_area_m2": 12.0,
+    "preferred_area_m2": [
+      14.0,
+      22.0
+    ],
+    "min_clear_width_m": 3.2,
+    "island_preferred_from_m2": 16.0
+  },
+  "pantry": {
+    "min_area_m2": 2.5,
+    "preferred_area_m2": [
+      3.0,
+      6.0
+    ],
+    "min_clear_width_m": 1.4
+  },
+  "office": {
+    "min_area_m2": 8.0,
+    "preferred_area_m2": [
+      9.0,
+      13.0
+    ],
+    "min_clear_width_m": 2.7
+  },
+  "bedroom_master": {
+    "min_area_m2": 17.0,
+    "preferred_area_m2": [
+      18.0,
+      24.0
+    ],
+    "min_clear_width_m": 3.6
+  },
+  "bedroom_secondary": {
+    "min_area_m2": 10.5,
+    "preferred_area_m2": [
+      11.5,
+      14.0
+    ],
+    "min_clear_width_m": 3.0
+  },
+  "bedroom_guest": {
+    "min_area_m2": 11.0,
+    "preferred_area_m2": [
+      12.0,
+      15.0
+    ],
+    "min_clear_width_m": 3.0
+  },
+  "walk_in_closet": {
+    "min_area_m2": 4.0,
+    "preferred_area_m2": [
+      5.0,
+      8.0
+    ],
+    "min_clear_width_m": 1.8
+  },
+  "ensuite": {
+    "min_area_m2": 5.5,
+    "preferred_area_m2": [
+      6.0,
+      10.0
+    ],
+    "min_clear_width_m": 2.0
+  },
+  "bathroom_shared": {
+    "min_area_m2": 4.5,
+    "preferred_area_m2": [
+      5.0,
+      8.0
+    ],
+    "min_clear_width_m": 1.8
+  },
+  "powder": {
+    "min_area_m2": 1.8,
+    "preferred_area_m2": [
+      2.0,
+      3.0
+    ],
+    "min_clear_width_m": 1.2
+  },
+  "laundry": {
+    "min_area_m2": 4.0,
+    "preferred_area_m2": [
+      5.0,
+      8.0
+    ],
+    "min_clear_width_m": 1.8
+  },
+  "staircase": {
+    "min_area_m2": 5.5,
+    "preferred_area_m2": [
+      6.5,
+      10.0
+    ],
+    "min_clear_width_m": 0.95
+  },
+  "gallery": {
+    "min_area_m2": 6.0,
+    "preferred_area_m2": [
+      8.0,
+      18.0
+    ],
+    "min_clear_width_m": 1.2
+  },
+  "garage": {
+    "min_area_m2": 32.0,
+    "preferred_area_m2": [
+      34.0,
+      42.0
+    ],
+    "min_clear_width_m": 5.5
+  },
+  "storage": {
+    "min_area_m2": 1.5,
+    "preferred_area_m2": [
+      2.0,
+      6.0
+    ],
+    "min_clear_width_m": 1.1
+  },
+  "alfresco": {
+    "min_area_m2": 10.0,
+    "preferred_area_m2": [
+      14.0,
+      30.0
+    ],
+    "min_clear_width_m": 2.8
+  },
+  "balcony": {
+    "min_area_m2": 6.0,
+    "preferred_area_m2": [
+      8.0,
+      18.0
+    ],
+    "min_clear_width_m": 1.8
+  },
+  "media_room": {
+    "min_area_m2": 12.0,
+    "preferred_area_m2": [
+      15.0,
+      24.0
+    ],
+    "min_clear_width_m": 3.2
+  },
+  "mudroom": {
+    "min_area_m2": 3.0,
+    "preferred_area_m2": [
+      4.0,
+      7.0
+    ],
+    "min_clear_width_m": 1.5
+  },
+  "linen": {
+    "min_area_m2": 1.0,
+    "preferred_area_m2": [
+      1.2,
+      2.5
+    ],
+    "min_clear_width_m": 0.8
+  },
+  "outdoor_kitchen": {
+    "min_area_m2": 3.0,
+    "preferred_area_m2": [
+      4.0,
+      10.0
+    ],
+    "min_clear_width_m": 1.6
+  }
+}

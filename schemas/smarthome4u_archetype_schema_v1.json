@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SmartHome-4U Archetype Schema v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "archetype_id",
+    "archetype_name",
+    "family",
+    "status",
+    "brand_tier",
+    "design_language_profile",
+    "site_compatibility",
+    "program",
+    "space_catalog",
+    "adjacency_rules",
+    "zoning_rules",
+    "massing_rules",
+    "facade_rules",
+    "structural_rules",
+    "lsf_rules",
+    "mep_rules",
+    "variant_rules",
+    "scoring_profile",
+    "output_templates",
+    "metadata"
+  ]
+}

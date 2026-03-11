@@ -1,0 +1,41 @@
+[
+  {
+    "id": "model-a",
+    "name": "Cedar Lane",
+    "sqft": 1200,
+    "bedrooms": 3,
+    "bathrooms": 2,
+    "floors": 1,
+    "basePriceUSD": 250000,
+    "baseBuildMonths": 6,
+    "floorplanImage": "/images/floorplan-a.svg",
+    "tags": ["starter", "energy-ready"],
+    "baseSavingsPct": 10
+  },
+  {
+    "id": "model-b",
+    "name": "Maple Grove",
+    "sqft": 2200,
+    "bedrooms": 4,
+    "bathrooms": 3,
+    "floors": 2,
+    "basePriceUSD": 420000,
+    "baseBuildMonths": 8,
+    "floorplanImage": "/images/floorplan-b.svg",
+    "tags": ["family", "energy-ready"],
+    "baseSavingsPct": 15
+  },
+  {
+    "id": "model-c",
+    "name": "Pine Crest",
+    "sqft": 3400,
+    "bedrooms": 5,
+    "bathrooms": 4,
+    "floors": 2,
+    "basePriceUSD": 680000,
+    "baseBuildMonths": 10,
+    "floorplanImage": "/images/floorplan-c.svg",
+    "tags": ["luxury", "energy-ready"],
+    "baseSavingsPct": 20
+  }
+]
