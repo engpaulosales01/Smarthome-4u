@@ -56,6 +56,18 @@ import { chromium } from 'playwright';
   const invText = await invResp.text();
   console.log('/export/investor length', invText.length);
 
+  // Save artifacts for CI upload
+  const fs = await import('fs');
+  const artifactsDir = './artifacts';
+  try { fs.mkdirSync(artifactsDir, { recursive: true }); } catch (e) { /* exists */ }
+  // screenshot
+  try {
+    await page.screenshot({ path: `${artifactsDir}/demo-page.png`, fullPage: true });
+  } catch (e) { console.error('screenshot failed', e); }
+  // save export responses
+  try { fs.writeFileSync(`${artifactsDir}/export-permit.json`, permitText); } catch (e) { console.error('write permit failed', e); }
+  try { fs.writeFileSync(`${artifactsDir}/export-investor.json`, invText); } catch (e) { console.error('write investor failed', e); }
+
   await browser.close();
   console.log('E2E script finished');
 })();
