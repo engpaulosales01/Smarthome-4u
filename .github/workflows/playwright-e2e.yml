@@ -2,9 +2,13 @@ name: Playwright E2E
 
 on:
   push:
-    branches: [ main ]
+    # run on any branch push
+    branches: ['**']
+    # run on any tag push
+    tags: ['*']
   pull_request:
-    branches: [ main ]
+    # run for PRs from any branch
+    branches: ['**']
 
 jobs:
   e2e:
