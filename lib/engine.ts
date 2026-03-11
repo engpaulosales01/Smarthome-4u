@@ -2,6 +2,7 @@
 import catalog from '../data/catalog.json';
 import options from '../data/options.json';
 import markets from '../data/markets.json';
+import type { Selection } from './types';
 
 // type definitions
 export type Market = typeof markets[number];
@@ -179,3 +180,78 @@ export function calculatePricing(scenario: BuildScenario): PricingResult {
 export const allModels = catalog as Model[];
 export const allMarkets = markets as Market[];
 export const allOptions = options;
+
+// Backwards-compatible exports and helpers used by the demo UI
+export { catalog, markets };
+
+export const defaultSelection: Selection = {
+  flooringTier: 'basic',
+  kitchenTier: 'basic',
+  bathTier: 'basic',
+  facade: (options as any).exterior.facade[0]?.name ?? 'siding',
+  roof: (options as any).exterior.roof[0]?.name ?? 'standard',
+  solarReady: 'false',
+  smartPackage: 'BASIC'
+};
+
+export function getRecommendations(intent: any) {
+  // Accept either `CustomerIntent` or the app's `IntentInput` shape and normalize
+  const normalized: CustomerIntent = {
+    location: intent.location,
+    budgetMin: intent.budgetMin ?? intent.budgetMin,
+    budgetMax: intent.budgetMax ?? intent.budgetMax,
+    householdSize: intent.householdSize ?? intent.householdSize,
+    sustainability: (intent.sustainability ?? intent.sustainabilityPriority) || 'medium',
+    smart: (intent.smart ?? intent.smartPriority) || 'medium'
+  } as CustomerIntent;
+  return recommendModels(normalized);
+}
+
+export function calculateScenario(model: Model, selection: any, marketId: string) {
+  // build a BuildScenario compatible object from provided selection
+  const scenario: BuildScenario = {
+    model,
+    interior: {
+      flooringTier: selection.flooringTier ?? 'basic',
+      kitchenTier: selection.kitchenTier ?? 'basic',
+      bathTier: selection.bathTier ?? 'basic'
+    },
+    exterior: {
+      facade: selection.facade ?? (options as any).exterior.facade[0].name,
+      roof: selection.roof ?? (options as any).exterior.roof[0].name,
+      solarReady: selection.solarReady === 'true' || !!selection.solarReady
+    },
+    smartPackage: selection.smartPackage ?? 'BASIC',
+    marketId
+  };
+
+  const pricing = calculatePricing(scenario);
+  const mkt = findMarket(marketId) || (markets[0] as Market);
+
+  return {
+    ...pricing,
+    market: mkt,
+    grossMarginUSD: pricing.marketComparablePriceUSD - pricing.totalPriceUSD
+  };
+}
+
+export function investorAssumptions(totalPriceUSD: number, marketComparablePriceUSD: number) {
+  const gross = marketComparablePriceUSD - totalPriceUSD;
+  const downPaymentPct = 0.2;
+  const debtPct = 0.8;
+  const interestRate = 0.06;
+  const irr = 0.12;
+  const dscr = 1.25;
+
+  const monthly = gross / 12;
+  const cashFlowSeries = Array.from({ length: 12 }).map((_, i) => ({ month: `M${i + 1}`, cashFlow: monthly }));
+
+  return {
+    irr,
+    dscr,
+    cashFlowSeries,
+    downPaymentPct,
+    debtPct,
+    interestRate
+  };
+}
