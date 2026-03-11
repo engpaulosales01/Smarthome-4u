@@ -51,3 +51,10 @@ jobs:
           CI: true
         run: |
           node scripts/demo-e2e.mjs
+      - name: Upload server log and artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2e-artifacts
+          path: |
+            server.log
+            artifacts/**
