@@ -1,41 +1,41 @@
 [
   {
-    "id": "urban-nest-24",
-    "name": "Urban Nest 24",
-    "sqft": 2400,
+    "id": "model-a",
+    "name": "Cedar Lane",
+    "sqft": 1200,
     "bedrooms": 3,
-    "bathrooms": 2.5,
-    "floors": 2,
-    "basePriceUSD": 395000,
-    "baseBuildMonths": 8,
-    "baseSavingsPct": 18,
-    "floorplanImage": "https://placehold.co/600x360?text=Urban+Nest+24",
-    "tags": ["starter", "energy-ready"]
+    "bathrooms": 2,
+    "floors": 1,
+    "basePriceUSD": 250000,
+    "baseBuildMonths": 6,
+    "floorplanImage": "/images/floorplan-a.svg",
+    "tags": ["starter", "energy-ready"],
+    "baseSavingsPct": 10
   },
   {
-    "id": "family-horizon-31",
-    "name": "Family Horizon 31",
-    "sqft": 3100,
+    "id": "model-b",
+    "name": "Maple Grove",
+    "sqft": 2200,
     "bedrooms": 4,
     "bathrooms": 3,
     "floors": 2,
-    "basePriceUSD": 515000,
-    "baseBuildMonths": 9,
-    "baseSavingsPct": 22,
-    "floorplanImage": "https://placehold.co/600x360?text=Family+Horizon+31",
-    "tags": ["family", "energy-ready"]
+    "basePriceUSD": 420000,
+    "baseBuildMonths": 8,
+    "floorplanImage": "/images/floorplan-b.svg",
+    "tags": ["family", "energy-ready"],
+    "baseSavingsPct": 15
   },
   {
-    "id": "signature-estate-38",
-    "name": "Signature Estate 38",
-    "sqft": 3800,
+    "id": "model-c",
+    "name": "Pine Crest",
+    "sqft": 3400,
     "bedrooms": 5,
     "bathrooms": 4,
     "floors": 2,
-    "basePriceUSD": 690000,
-    "baseBuildMonths": 11,
-    "baseSavingsPct": 25,
-    "floorplanImage": "https://placehold.co/600x360?text=Signature+Estate+38",
-    "tags": ["family", "premium", "energy-ready"]
+    "basePriceUSD": 680000,
+    "baseBuildMonths": 10,
+    "floorplanImage": "/images/floorplan-c.svg",
+    "tags": ["luxury", "energy-ready"],
+    "baseSavingsPct": 20
   }
 ]

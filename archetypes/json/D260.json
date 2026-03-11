@@ -1,0 +1,534 @@
+{
+  "schema_version": "1.0",
+  "archetype_id": "D260",
+  "archetype_name": "Signature 260 DS",
+  "family": "signature_double_storey",
+  "status": "active",
+  "brand_tier": "premium",
+  "target_customer_segment": [
+    "premium_family",
+    "design_led_buyer"
+  ],
+  "primary_use_case": "single_family_detached",
+  "design_language_profile": {
+    "clean_lines": 1.0,
+    "volumetric_harmony": 1.0,
+    "intelligent_simplicity": 1.0,
+    "timeless_sophistication": 0.95,
+    "modular_logic": 1.0,
+    "fabrication_rationality": 1.0,
+    "standardized_repeatability": 1.0,
+    "indoor_outdoor_integration": 0.9,
+    "high_daylight_priority": 0.9,
+    "reduced_formal_complexity": 1.0
+  },
+  "site_compatibility": {
+    "lot_types": [
+      "suburban_rectangular",
+      "corner_lot"
+    ],
+    "min_lot_width_m": 14.0,
+    "preferred_lot_width_m": [
+      16.0,
+      20.0
+    ],
+    "min_lot_depth_m": 28.0,
+    "preferred_lot_depth_m": [
+      30.0,
+      38.0
+    ],
+    "topography_tolerance": {
+      "flat": true,
+      "gentle_slope": true,
+      "moderate_slope": false
+    },
+    "garage_access": [
+      "front_loaded",
+      "side_loaded_optional"
+    ],
+    "setback_profile": "standard_suburban",
+    "climate_profiles": [
+      "hot_humid",
+      "mixed_humid"
+    ]
+  },
+  "program": {
+    "storeys": 2,
+    "gross_area_m2": 260,
+    "net_internal_area_m2": 213.2,
+    "bedrooms": 4,
+    "master_suites": 1,
+    "bathrooms": 3.0,
+    "powder_rooms": 1,
+    "office": 1,
+    "garage_spaces": 2,
+    "living_areas": 2,
+    "dining_areas": 1,
+    "kitchen_type": "open_plan_island",
+    "pantry": true,
+    "laundry": true,
+    "alfresco": true,
+    "balcony": true,
+    "media_room": true,
+    "storage_room": true,
+    "mudroom": true
+  },
+  "space_catalog": [
+    {
+      "space_id": "entry",
+      "space_type": "entry",
+      "required": true,
+      "count": 1,
+      "level_preference": null,
+      "zone": "public",
+      "target_area_m2": 7,
+      "min_area_m2": 5
+    },
+    {
+      "space_id": "office",
+      "space_type": "office",
+      "required": true,
+      "count": 1,
+      "level_preference": null,
+      "zone": "public",
+      "target_area_m2": 10,
+      "min_area_m2": 8
+    },
+    {
+      "space_id": "living_main",
+      "space_type": "living_main",
+      "required": true,
+      "count": 1,
+      "level_preference": null,
+      "zone": "public",
+      "target_area_m2": 34,
+      "min_area_m2": 28
+    },
+    {
+      "space_id": "living_secondary",
+      "space_type": "living_secondary",
+      "required": true,
+      "count": 1,
+      "level_preference": null,
+      "zone": "public",
+      "target_area_m2": 16,
+      "min_area_m2": 12
+    },
+    {
+      "space_id": "dining",
+      "space_type": "dining",
+      "required": true,
+      "count": 1,
+      "level_preference": null,
+      "zone": "public",
+      "target_area_m2": 15,
+      "min_area_m2": 12
+    },
+    {
+      "space_id": "kitchen",
+      "space_type": "kitchen",
+      "required": true,
+      "count": 1,
+      "level_preference": null,
+      "zone": "public",
+      "target_area_m2": 17,
+      "min_area_m2": 14
+    },
+    {
+      "space_id": "pantry",
+      "space_type": "pantry",
+      "required": true,
+      "count": 1,
+      "level_preference": null,
+      "zone": "service",
+      "target_area_m2": 4,
+      "min_area_m2": 3
+    },
+    {
+      "space_id": "laundry",
+      "space_type": "laundry",
+      "required": true,
+      "count": 1,
+      "level_preference": null,
+      "zone": "service",
+      "target_area_m2": 6,
+      "min_area_m2": 5
+    },
+    {
+      "space_id": "bedroom_master",
+      "space_type": "bedroom_master",
+      "required": true,
+      "count": 1,
+      "level_preference": "upper",
+      "zone": "private",
+      "target_area_m2": 20,
+      "min_area_m2": 17
+    },
+    {
+      "space_id": "walk_in_closet",
+      "space_type": "walk_in_closet",
+      "required": true,
+      "count": 1,
+      "level_preference": "upper",
+      "zone": "private",
+      "target_area_m2": 5.5,
+      "min_area_m2": 4
+    },
+    {
+      "space_id": "ensuite",
+      "space_type": "ensuite",
+      "required": true,
+      "count": 1,
+      "level_preference": "upper",
+      "zone": "private",
+      "target_area_m2": 7,
+      "min_area_m2": 5.5
+    },
+    {
+      "space_id": "bedroom_secondary_3",
+      "space_type": "bedroom_secondary",
+      "required": true,
+      "count": 3,
+      "level_preference": "upper",
+      "zone": "private",
+      "target_area_m2": 12,
+      "min_area_m2": 10.5
+    },
+    {
+      "space_id": "bathroom_shared",
+      "space_type": "bathroom_shared",
+      "required": true,
+      "count": 1,
+      "level_preference": "upper",
+      "zone": "private",
+      "target_area_m2": 6,
+      "min_area_m2": 5
+    },
+    {
+      "space_id": "powder",
+      "space_type": "powder",
+      "required": true,
+      "count": 1,
+      "level_preference": null,
+      "zone": "public",
+      "target_area_m2": 2.2,
+      "min_area_m2": 1.8
+    },
+    {
+      "space_id": "staircase",
+      "space_type": "staircase",
+      "required": true,
+      "count": 1,
+      "level_preference": null,
+      "zone": "circulation",
+      "target_area_m2": 7,
+      "min_area_m2": 5.5
+    },
+    {
+      "space_id": "gallery",
+      "space_type": "gallery",
+      "required": true,
+      "count": 1,
+      "level_preference": "upper",
+      "zone": "circulation",
+      "target_area_m2": 10,
+      "min_area_m2": 6
+    },
+    {
+      "space_id": "garage",
+      "space_type": "garage",
+      "required": true,
+      "count": 1,
+      "level_preference": null,
+      "zone": "service",
+      "target_area_m2": 38,
+      "min_area_m2": 34
+    },
+    {
+      "space_id": "alfresco",
+      "space_type": "alfresco",
+      "required": true,
+      "count": 1,
+      "level_preference": null,
+      "zone": "outdoor",
+      "target_area_m2": 18,
+      "min_area_m2": 14
+    },
+    {
+      "space_id": "balcony",
+      "space_type": "balcony",
+      "required": true,
+      "count": 1,
+      "level_preference": "upper",
+      "zone": "outdoor",
+      "target_area_m2": 10,
+      "min_area_m2": 8
+    },
+    {
+      "space_id": "storage",
+      "space_type": "storage",
+      "required": true,
+      "count": 1,
+      "level_preference": null,
+      "zone": "service",
+      "target_area_m2": 3,
+      "min_area_m2": 2
+    }
+  ],
+  "adjacency_rules": [
+    {
+      "rule_id": "kitchen_to_dining",
+      "space_a": "kitchen",
+      "space_b": "dining",
+      "relationship": "required_direct",
+      "weight": 1.0
+    },
+    {
+      "rule_id": "kitchen_to_pantry",
+      "space_a": "kitchen",
+      "space_b": "pantry",
+      "relationship": "required_direct",
+      "weight": 1.0
+    },
+    {
+      "rule_id": "living_to_dining",
+      "space_a": "living_main",
+      "space_b": "dining",
+      "relationship": "required_direct",
+      "weight": 1.0
+    },
+    {
+      "rule_id": "living_to_alfresco",
+      "space_a": "living_main",
+      "space_b": "alfresco",
+      "relationship": "preferred_direct",
+      "weight": 0.9
+    },
+    {
+      "rule_id": "master_to_public",
+      "space_a": "bedroom_master",
+      "space_b": "living_main",
+      "relationship": "avoid_direct",
+      "weight": 0.9
+    },
+    {
+      "rule_id": "office_near_entry",
+      "space_a": "office",
+      "space_b": "entry",
+      "relationship": "preferred_near",
+      "weight": 0.7
+    },
+    {
+      "rule_id": "bedrooms_to_shared_bath",
+      "space_a": "bedroom_secondary",
+      "space_b": "bathroom_shared",
+      "relationship": "preferred_near",
+      "weight": 0.8
+    },
+    {
+      "rule_id": "laundry_to_service",
+      "space_a": "laundry",
+      "space_b": "garage",
+      "relationship": "preferred_near",
+      "weight": 0.7
+    }
+  ],
+  "zoning_rules": {
+    "public_zone": [
+      "entry",
+      "foyer",
+      "living_main",
+      "living_secondary",
+      "dining",
+      "kitchen",
+      "powder",
+      "office"
+    ],
+    "private_zone": [
+      "bedroom_master",
+      "bedroom_secondary",
+      "bedroom_guest",
+      "walk_in_closet",
+      "ensuite",
+      "bathroom_shared"
+    ],
+    "service_zone": [
+      "pantry",
+      "laundry",
+      "storage",
+      "garage",
+      "mudroom",
+      "linen"
+    ],
+    "outdoor_zone": [
+      "alfresco",
+      "balcony",
+      "outdoor_kitchen"
+    ],
+    "circulation_zone": [
+      "hallway",
+      "staircase",
+      "gallery"
+    ],
+    "privacy_gradient": {
+      "entry_to_public": "direct",
+      "public_to_private": "buffered",
+      "garage_to_service": "direct",
+      "private_to_outdoor": "controlled"
+    }
+  },
+  "massing_rules": {
+    "primary_volume_count": {
+      "min": 1,
+      "max": 3
+    },
+    "secondary_volume_count": {
+      "min": 0,
+      "max": 2
+    },
+    "footprint_complexity_score_max": 0.28,
+    "preferred_composition": "stacked_orthogonal_volumes",
+    "horizontal_plane_emphasis": true,
+    "roof_language": "flat_low_pitch_hidden",
+    "cantilever_max_m": 2.4,
+    "double_height_space_allowed": true,
+    "balcony_strategy": "integrated_linear",
+    "entry_expression": "recessed_protected",
+    "avoid_fragmented_massing": true,
+    "avoid_excessive_angularity": true
+  },
+  "facade_rules": {
+    "glazing_ratio_front": [
+      0.25,
+      0.45
+    ],
+    "glazing_ratio_rear": [
+      0.4,
+      0.7
+    ],
+    "corner_glazing_allowed": true,
+    "window_alignment_required": true,
+    "window_rhythm": "calm_ordered",
+    "primary_material_palette": [
+      "smooth_light_render",
+      "dark_aluminium_frame",
+      "timber_accent",
+      "stone_accent_optional"
+    ],
+    "material_count_max": 4,
+    "feature_frame_allowed": true,
+    "ornamentation_allowed": false,
+    "parapet_strategy": "clean_continuous",
+    "lighting_language": "integrated_warm_linear"
+  },
+  "structural_rules": {
+    "preferred_grid_mm": 600,
+    "preferred_span_ranges_m": {
+      "living": [
+        4.5,
+        7.5
+      ],
+      "bedrooms": [
+        3.0,
+        4.2
+      ],
+      "garage": [
+        5.5,
+        6.5
+      ]
+    },
+    "max_unresolved_span_m": 8.0,
+    "load_path_continuity_required": true,
+    "stacked_load_bearing_alignment_preferred": true,
+    "opening_density_limit_per_wall": 0.65
+  },
+  "lsf_rules": {
+    "panelization_required": true,
+    "panel_width_preference_mm": [
+      600,
+      1200
+    ],
+    "repetition_priority": "high",
+    "wet_wall_alignment_required": true,
+    "service_core_compactness_priority": "high",
+    "stair_geometry_standardized": true,
+    "avoid_irregular_wall_angles": true,
+    "avoid_small_nonstandard_panels": true,
+    "facade_offsets_limit": 3,
+    "balcony_connection_types": [
+      "standard_type_a",
+      "standard_type_b"
+    ]
+  },
+  "mep_rules": {
+    "wet_areas_stacked_preferred": true,
+    "wet_core_consolidation_priority": "high",
+    "max_distance_kitchen_to_waste_stack_m": 6.0,
+    "laundry_near_service_wall_preferred": true,
+    "plant_space_required": false,
+    "hvac_zone_strategy": "simple_dual_zone",
+    "solar_ready_roof_preferred": true,
+    "ev_charger_ready": true
+  },
+  "variant_rules": {
+    "allowed_variants": [
+      "mirror",
+      "facade_pack_a",
+      "facade_pack_b",
+      "media_or_guest",
+      "alfresco_extended"
+    ],
+    "non_negotiable_elements": [
+      "kitchen_dining_living_relationship",
+      "master_privacy_logic",
+      "window_alignment",
+      "primary_massing_language"
+    ],
+    "max_variation_distance_score": 0.2
+  },
+  "scoring_profile": {
+    "weights": {
+      "brand_fit": 0.2,
+      "plan_efficiency": 0.15,
+      "customer_fit": 0.15,
+      "fabrication_simplicity": 0.15,
+      "cost_fit": 0.1,
+      "daylight_quality": 0.08,
+      "privacy_quality": 0.06,
+      "circulation_quality": 0.05,
+      "resale_appeal": 0.04,
+      "permitting_simplicity": 0.02
+    },
+    "minimum_thresholds": {
+      "brand_fit": 0.85,
+      "plan_efficiency": 0.75,
+      "fabrication_simplicity": 0.8
+    }
+  },
+  "output_templates": {
+    "required_outputs": [
+      "structured_brief",
+      "room_schedule",
+      "adjacency_graph",
+      "2d_floor_plan",
+      "massing_model",
+      "facade_views",
+      "render_front",
+      "render_rear",
+      "render_lateral",
+      "gross_net_area_schedule",
+      "lsf_readiness_score"
+    ],
+    "optional_outputs": [
+      "ifc_export",
+      "quantity_takeoff",
+      "solar_readiness_summary",
+      "cost_estimate_band"
+    ]
+  },
+  "metadata": {
+    "owner": "SmartHome-4U",
+    "created": "2026-03-08",
+    "notes": "Balanced premium double-storey family house."
+  }
+}

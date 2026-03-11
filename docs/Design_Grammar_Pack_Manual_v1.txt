@@ -1,0 +1,3 @@
+SmartHome-4U Design Grammar Pack v1
+Purpose: computable design foundation for a specialized generative housing AI.
+Operating principle: Generate -> Validate -> Rank -> Refine -> Export
