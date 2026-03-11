@@ -1,117 +1,181 @@
-import catalogData from '@/data/catalog.json';
-import optionsData from '@/data/options.json';
-import marketsData from '@/data/markets.json';
-import { HomeModel, IntentInput, Market, OptionsCatalog, Selection } from './types';
+// Pure functions for recommendation, pricing, and timeline
+import catalog from '../data/catalog.json';
+import options from '../data/options.json';
+import markets from '../data/markets.json';
 
-export const catalog = catalogData as HomeModel[];
-export const options = optionsData as OptionsCatalog;
-export const markets = marketsData as Market[];
+// type definitions
+export type Market = typeof markets[number];
+export type Model = typeof catalog[number];
+export type InteriorOption = { name: string; priceDeltaUSD: number; timeDeltaWeeks: number; energySavingsPctDelta: number; notes: string };
+export type SmartPackage = { name: string; label: string; priceDeltaUSD: number; timeDeltaWeeks: number; energySavingsPctDelta: number; notes: string };
 
-export const defaultSelection: Selection = {
-  flooringTier: 'standard',
-  kitchenTier: 'standard',
-  bathTier: 'standard',
-  facade: 'transitional',
-  roof: 'architectural-shingle',
-  solarReady: 'false',
-  smartPackage: 'BASIC'
+// structured options shape matching data/options.json
+type Options = {
+  interior: {
+    flooringTier: InteriorOption[];
+    kitchenTier: InteriorOption[];
+    bathTier: InteriorOption[];
+  };
+  exterior: {
+    facade: InteriorOption[];
+    roof: InteriorOption[];
+    solarReady: InteriorOption;
+  };
+  smartPackages: SmartPackage[];
 };
 
-export function getMarket(id: string) {
-  return markets.find((market) => market.id === id) ?? markets[0];
+export interface CustomerIntent {
+  location: string; // market id
+  budgetMin: number;
+  budgetMax: number;
+  householdSize: number;
+  sustainability: 'low' | 'medium' | 'high';
+  smart: 'low' | 'medium' | 'high';
 }
 
-function scoreModel(model: HomeModel, intent: IntentInput) {
-  let score = 0;
-  if (intent.householdSize >= 4 && model.bedrooms >= 4) score += 30;
-  if (intent.householdSize <= 2 && model.bedrooms <= 3) score += 20;
-  if (intent.sustainabilityPriority === 'high' && model.tags.includes('energy-ready')) score += 25;
-  if (intent.smartPriority === 'high' && model.tags.includes('energy-ready')) score += 10;
-  if (model.basePriceUSD <= intent.budgetMax) score += 20;
-  else score -= Math.min(20, Math.floor((model.basePriceUSD - intent.budgetMax) / 10000));
-  score += Math.max(0, 10 - Math.abs(intent.householdSize * 650 - model.sqft) / 200);
-  return score;
+export interface Recommendation {
+  model: Model;
+  rationale: string;
 }
 
-export function getRecommendations(intent: IntentInput) {
-  return [...catalog]
-    .sort((a, b) => scoreModel(b, intent) - scoreModel(a, intent))
-    .slice(0, 3)
-    .map((model) => {
-      const withinBudget = model.basePriceUSD <= intent.budgetMax;
-      const rationale = withinBudget
-        ? `${model.bedrooms}BR layout aligns to household needs with a base cost at ${Math.round((model.basePriceUSD / intent.budgetMax) * 100)}% of max budget.`
-        : `Closest match above budget ceiling. Tradeoff: reduce finish tiers or expand budget by ${model.basePriceUSD - intent.budgetMax}.`;
-      const recommendationSelection = {
-        ...defaultSelection,
-        solarReady: intent.sustainabilityPriority === 'high' ? 'true' : defaultSelection.solarReady,
-        smartPackage: intent.smartPriority === 'high' ? 'PRO' : intent.smartPriority === 'medium' ? 'PLUS' : 'BASIC'
-      };
-      return { model, rationale, recommendationSelection };
-    });
+// helpers
+function findMarket(id: string): Market | undefined {
+  return markets.find(m => m.id === id);
 }
 
-function collectOptionValues(selection: Selection) {
-  const picks = [
-    options.interior.flooringTier[selection.flooringTier],
-    options.interior.kitchenTier[selection.kitchenTier],
-    options.interior.bathTier[selection.bathTier],
-    options.exterior.facade[selection.facade],
-    options.exterior.roof[selection.roof],
-    options.exterior.solarReady[selection.solarReady],
-    options.smartPackages[selection.smartPackage]
-  ];
+export function recommendModels(intent: CustomerIntent): Recommendation[] {
+  // simple deterministic rules
+  const results: Recommendation[] = [];
 
-  return picks;
+  // base filter by budget
+  catalog.forEach(model => {
+    const minPrice = model.basePriceUSD;
+    if (intent.budgetMax < minPrice) return; // skip if even base price above max
+    results.push({ model, rationale: '' });
+  });
+
+  // sort by household size suitability
+  results.sort((a, b) => {
+    const score = (m: Model) => {
+      let s = 0;
+      if (intent.householdSize >= 4 && m.bedrooms >= 3) s += 10;
+      if (intent.householdSize <= 2 && m.bedrooms <= 2) s += 5;
+      // sustainability
+      if (intent.sustainability === 'high' && m.tags.includes('energy-ready')) s += 5;
+      // smart priority
+      if (intent.smart === 'high' && intent.sustainability === 'high') s += 2;
+      return s;
+    };
+    return score(b.model) - score(a.model);
+  });
+
+  const top = results.slice(0, 3).map((r) => {
+    let rationale = '';
+    if (intent.householdSize >= 4 && r.model.bedrooms < 3) {
+      rationale = 'Closest match; family size demands more bedrooms';
+    } else {
+      rationale = 'Fits household and budget';
+    }
+    if (intent.sustainability === 'high' && !r.model.tags.includes('energy-ready')) {
+      rationale += ' (not energy-ready)';
+    }
+    return { model: r.model, rationale };
+  });
+  return top;
 }
 
-export function calculateScenario(model: HomeModel, selection: Selection, marketId: string) {
-  const market = getMarket(marketId);
-  const picks = collectOptionValues(selection);
-  const optionPrice = picks.reduce((sum, pick) => sum + pick.priceDeltaUSD, 0);
-  const optionWeeks = picks.reduce((sum, pick) => sum + pick.timeDeltaWeeks, 0);
-  const optionEnergy = picks.reduce((sum, pick) => sum + pick.energySavingsPctDelta, 0);
+export interface BuildScenario {
+  model: Model;
+  interior: {
+    flooringTier: string;
+    kitchenTier: string;
+    bathTier: string;
+  };
+  exterior: {
+    facade: string;
+    roof: string;
+    solarReady: boolean;
+  };
+  smartPackage: string;
+  marketId: string;
+}
 
-  const permitFees = 4500;
-  const totalPriceUSD = model.basePriceUSD + optionPrice + market.logisticsUSD + permitFees;
-  const marketComparablePriceUSD = model.basePriceUSD * market.marketPriceMultiplier;
-  const grossMarginPct = ((marketComparablePriceUSD - totalPriceUSD) / marketComparablePriceUSD) * 100;
-  const grossMarginUSD = marketComparablePriceUSD - totalPriceUSD;
-  const buildTimeMonths = model.baseBuildMonths + (market.permitWeeks + optionWeeks) / 4.3;
-  const energySavingsPct = Math.min(70, model.baseSavingsPct + optionEnergy);
+export interface PricingResult {
+  totalPriceUSD: number;
+  marketComparablePriceUSD: number;
+  grossMarginPct: number;
+  buildTimeMonths: number;
+  energySavingsPct: number;
+  badges: string[];
+}
+
+export function calculatePricing(scenario: BuildScenario): PricingResult {
+  const mkt = findMarket(scenario.marketId);
+  if (!mkt) throw new Error('Market not found');
+  const model = scenario.model;
+
+  let total = model.basePriceUSD;
+  let timeWeeks = 0;
+  let energyPct = model.baseSavingsPct || 0;
+  const badges: string[] = [];
+  if (model.tags.includes('energy-ready')) badges.push('Energy-ready');
+
+  // interior deltas
+  const opts = options as unknown as Options;
+  const floor = opts.interior.flooringTier.find((o) => o.name === scenario.interior.flooringTier);
+  const kitchen = opts.interior.kitchenTier.find((o) => o.name === scenario.interior.kitchenTier);
+  const bath = opts.interior.bathTier.find((o) => o.name === scenario.interior.bathTier);
+  [floor, kitchen, bath].forEach((opt) => {
+    if (opt) {
+      total += opt.priceDeltaUSD;
+      timeWeeks += opt.timeDeltaWeeks;
+      energyPct += opt.energySavingsPctDelta;
+    }
+  });
+
+  // exterior
+  const ext = opts.exterior;
+  const facade = ext.facade.find((o) => o.name === scenario.exterior.facade);
+  const roof = ext.roof.find((o) => o.name === scenario.exterior.roof);
+  const solar = scenario.exterior.solarReady ? ext.solarReady : null;
+  [facade, roof, solar].forEach((opt) => {
+    if (opt) {
+      total += opt.priceDeltaUSD;
+      timeWeeks += opt.timeDeltaWeeks;
+      energyPct += opt.energySavingsPctDelta;
+    }
+  });
+  if (scenario.exterior.solarReady) badges.push('Solar-ready');
+
+  // smart package
+  const pkg = opts.smartPackages.find((p) => p.name === scenario.smartPackage);
+  if (pkg) {
+    total += pkg.priceDeltaUSD;
+    timeWeeks += pkg.timeDeltaWeeks;
+    energyPct += pkg.energySavingsPctDelta;
+    badges.push(pkg.label);
+  }
+
+  // market logistics & permit
+  total += mkt.logisticsUSD;
+  timeWeeks += mkt.permitWeeks;
+
+  const marketComparable = model.basePriceUSD * mkt.marketPriceMultiplier;
+  const grossMargin = (marketComparable - total) / marketComparable;
+  const buildMonths = model.baseBuildMonths + timeWeeks / 4.3;
+  if (energyPct > 70) energyPct = 70;
 
   return {
-    market,
-    totalPriceUSD,
-    marketComparablePriceUSD,
-    grossMarginPct,
-    grossMarginUSD,
-    buildTimeMonths,
-    energySavingsPct,
-    permitFees,
-    optionPrice
+    totalPriceUSD: total,
+    marketComparablePriceUSD: marketComparable,
+    grossMarginPct: parseFloat(grossMargin.toFixed(3)),
+    buildTimeMonths: parseFloat(buildMonths.toFixed(1)),
+    energySavingsPct: parseFloat(energyPct.toFixed(1)),
+    badges,
   };
 }
 
-export function investorAssumptions(totalPriceUSD: number, salesPriceUSD: number) {
-  const downPaymentPct = 0.25;
-  const debtPct = 0.75;
-  const interestRate = 0.08;
-  const monthlyRate = interestRate / 12;
-  const debtAmount = totalPriceUSD * debtPct;
-  const equityAmount = totalPriceUSD * downPaymentPct;
-  const annualDebtService = debtAmount * interestRate;
-  const noi = salesPriceUSD - totalPriceUSD;
-  const dscr = noi / annualDebtService;
-  const irr = ((salesPriceUSD - totalPriceUSD) / equityAmount) * 100;
-
-  const cashFlowSeries = Array.from({ length: 12 }, (_, index) => {
-    const month = index + 1;
-    const draw = -(totalPriceUSD / 10) * (month <= 10 ? 1 : 0);
-    const carry = month <= 10 ? -(debtAmount * monthlyRate) : 0;
-    const exit = month === 12 ? salesPriceUSD : 0;
-    return { month: `M${month}`, cashFlow: Math.round(draw + carry + exit) };
-  });
-
-  return { downPaymentPct, debtPct, interestRate, dscr, irr, cashFlowSeries };
-}
+// export data for use
+export const allModels = catalog as Model[];
+export const allMarkets = markets as Market[];
+export const allOptions = options;
