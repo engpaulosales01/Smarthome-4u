@@ -46,7 +46,7 @@ export const useDemoStore = create<DemoState>((set) => ({
   setStep: (step) => set({ step }),
   setIntent: (intent) => set({ intent }),
   setSelectedModelId: (selectedModelId) => set({ selectedModelId }),
-  setSelection: (update) => set((state) => ({ selection: { ...state.selection, ...update } })),
+  setSelection: (update) => set((state) => ({ selection: { ...(state.selection ?? defaultSelection), ...update } })),
   setRecommendedSelection: (recommendedSelection) => set({ recommendedSelection, selection: recommendedSelection }),
   resetToRecommended: () => set((state) => ({ selection: state.recommendedSelection })),
   saveScenario: (scenario) =>
