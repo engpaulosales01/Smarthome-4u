@@ -32,7 +32,7 @@ export const useDemoStore = create<DemoState>((set) => ({
   step: 0,
   view: 'customer',
   intent: {
-    location: 'atlanta-ga',
+    location: 'atlanta',
     budgetMin: 350000,
     budgetMax: 600000,
     householdSize: 3,
