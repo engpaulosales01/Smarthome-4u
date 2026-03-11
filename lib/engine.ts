@@ -208,20 +208,23 @@ export function getRecommendations(intent: any) {
 }
 
 export function calculateScenario(model: Model, selection: any, marketId: string) {
+  // tolerate undefined or partial selection by falling back to defaults
+  const sel = selection ?? defaultSelection;
+
   // build a BuildScenario compatible object from provided selection
   const scenario: BuildScenario = {
     model,
     interior: {
-      flooringTier: selection.flooringTier ?? 'basic',
-      kitchenTier: selection.kitchenTier ?? 'basic',
-      bathTier: selection.bathTier ?? 'basic'
+      flooringTier: sel.flooringTier ?? defaultSelection.flooringTier,
+      kitchenTier: sel.kitchenTier ?? defaultSelection.kitchenTier,
+      bathTier: sel.bathTier ?? defaultSelection.bathTier
     },
     exterior: {
-      facade: selection.facade ?? (options as any).exterior.facade[0].name,
-      roof: selection.roof ?? (options as any).exterior.roof[0].name,
-      solarReady: selection.solarReady === 'true' || !!selection.solarReady
+      facade: sel.facade ?? defaultSelection.facade ?? (options as any).exterior.facade[0].name,
+      roof: sel.roof ?? defaultSelection.roof ?? (options as any).exterior.roof[0].name,
+      solarReady: (typeof sel.solarReady === 'string' ? sel.solarReady === 'true' : !!sel.solarReady) ?? (defaultSelection.solarReady === 'true')
     },
-    smartPackage: selection.smartPackage ?? 'BASIC',
+    smartPackage: sel.smartPackage ?? defaultSelection.smartPackage ?? 'BASIC',
     marketId
   };
 
