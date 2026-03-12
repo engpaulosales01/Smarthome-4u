@@ -1,0 +1,29 @@
+generator client { provider = "prisma-client-js" }
+datasource db { provider = "postgresql" url = env("DATABASE_URL") }
+
+enum EntityScope { HOLDCO OPCO SPV }
+enum RoleName { HOME_BUYER REALTOR ARCH_ENGINEER PROJECT_MANAGER FACTORY_PARTNER INVESTOR ADMIN_FINANCE }
+
+model User { id String @id @default(cuid()) email String @unique name String? passwordHash String? roles Role[] projects Project[] @relation("UserProjects") createdAt DateTime @default(now()) }
+model Role { id String @id @default(cuid()) name RoleName user User @relation(fields: [userId], references: [id]) userId String entity EntityScope projectId String? }
+model Project { id String @id @default(cuid()) name String entity EntityScope lot Lot? design Design? pricing Pricing? schedule Schedule? users User[] @relation("UserProjects") changeOrders ChangeOrder[] documents Document[] permits Permit[] inspections Inspection[] manufacturingOrders ManufacturingOrder[] shipments Shipment[] siteTasks SiteTask[] progressEvents ProgressEvent[] payments Payment[] draws Draw[] investorPositions InvestorPosition[] auditLogs AuditLog[] }
+model Lot { id String @id @default(cuid()) project Project @relation(fields:[projectId], references:[id]) projectId String @unique state String county String status String }
+model FloorplanSKU { id String @id @default(cuid()) code String @unique basePrice Float designs Design[] options ParametricOption[] }
+model Design { id String @id @default(cuid()) project Project @relation(fields:[projectId], references:[id]) projectId String @unique sku FloorplanSKU @relation(fields:[skuId], references:[id]) skuId String spec Json bom BOM[] }
+model ParametricOption { id String @id @default(cuid()) sku FloorplanSKU @relation(fields:[skuId], references:[id]) skuId String key String value String priceDelta Float scheduleDeltaDays Int }
+model BOM { id String @id @default(cuid()) design Design @relation(fields:[designId], references:[id]) designId String version Int items Json }
+model Pricing { id String @id @default(cuid()) project Project @relation(fields:[projectId], references:[id]) projectId String @unique total Float breakdown Json tierMultiplier Float }
+model Schedule { id String @id @default(cuid()) project Project @relation(fields:[projectId], references:[id]) projectId String @unique totalWeeks Int milestones Json }
+model ChangeOrder { id String @id @default(cuid()) project Project @relation(fields:[projectId], references:[id]) projectId String description String deltaPrice Float deltaDays Int status String }
+model Document { id String @id @default(cuid()) project Project @relation(fields:[projectId], references:[id]) projectId String kind String url String }
+model Permit { id String @id @default(cuid()) project Project @relation(fields:[projectId], references:[id]) projectId String authority String status String }
+model Inspection { id String @id @default(cuid()) project Project @relation(fields:[projectId], references:[id]) projectId String type String status String }
+model ManufacturingOrder { id String @id @default(cuid()) project Project @relation(fields:[projectId], references:[id]) projectId String status String packetUrl String? version Int }
+model Shipment { id String @id @default(cuid()) project Project @relation(fields:[projectId], references:[id]) projectId String trackingId String status String }
+model SiteTask { id String @id @default(cuid()) project Project @relation(fields:[projectId], references:[id]) projectId String title String status String }
+model ProgressEvent { id String @id @default(cuid()) project Project @relation(fields:[projectId], references:[id]) projectId String eventType String detail String createdAt DateTime @default(now()) }
+model Payment { id String @id @default(cuid()) project Project @relation(fields:[projectId], references:[id]) projectId String amount Float status String }
+model Draw { id String @id @default(cuid()) project Project @relation(fields:[projectId], references:[id]) projectId String amount Float status String dueDate DateTime }
+model InvestorPosition { id String @id @default(cuid()) project Project @relation(fields:[projectId], references:[id]) projectId String investorId String committed Float invested Float }
+model Distribution { id String @id @default(cuid()) investorId String amount Float paidAt DateTime }
+model AuditLog { id String @id @default(cuid()) project Project @relation(fields:[projectId], references:[id]) projectId String actorId String action String payload Json createdAt DateTime @default(now()) }
